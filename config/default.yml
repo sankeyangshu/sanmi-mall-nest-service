@@ -1,0 +1,19 @@
+# 启动本地服务配置
+server:
+  port: 3000
+  origin: localhost
+
+# 数据库配置
+db:
+  type: 'mysql' # 数据库类型
+  port: 3306 # 端口号
+  database: 'sanmi_mall_db' # 数据库名
+  timezone: '+08:00' # 服务器上配置的时区 - 东八时区
+
+# swagger接口文档配置
+swagger:
+  enable: true # 是否打开swagger接口文档
+
+# jwt配置
+jwt:
+  expiresIn: '4h'

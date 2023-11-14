@@ -1,15 +1,9 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './baseEntity.entity';
 import { Roles } from './roles.entity';
 
 @Entity()
-export class Resources {
+export class Resources extends BaseEntity {
   @PrimaryGeneratedColumn({ comment: '资源id' })
   id: number;
 
@@ -41,12 +35,6 @@ export class Resources {
 
   @Column({ type: 'int', default: 10, unique: false, unsigned: true, comment: '排序' })
   sort: number;
-
-  @CreateDateColumn({ comment: '创建时间' })
-  createtime: string;
-
-  @UpdateDateColumn({ comment: '更新时间' }) //自动生成并自动更新列
-  updatetime: string;
 
   @ManyToMany(() => Roles, (roles) => roles.resources, { cascade: true })
   roles: Roles[];

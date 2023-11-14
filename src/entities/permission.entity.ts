@@ -1,15 +1,9 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './baseEntity.entity';
 import { Roles } from './roles.entity';
 
 @Entity()
-export class Permission {
+export class Permission extends BaseEntity {
   @PrimaryGeneratedColumn({ comment: '权限id' })
   id: number;
 
@@ -25,12 +19,6 @@ export class Permission {
     nullable: true,
   })
   description: string;
-
-  @CreateDateColumn({ comment: '创建时间' })
-  createtime: Date;
-
-  @UpdateDateColumn({ comment: '更新时间' })
-  updatetime: Date;
 
   @ManyToMany(() => Roles, (roles) => roles.permissions)
   roles: Roles[];

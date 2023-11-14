@@ -1,15 +1,9 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './baseEntity.entity';
 import { User } from './user.entity';
 
 @Entity()
-export class Logs {
+export class Logs extends BaseEntity {
   @PrimaryGeneratedColumn({ comment: '日志id' })
   id: number;
 
@@ -24,9 +18,6 @@ export class Logs {
 
   @Column({ comment: '请求结果' })
   result: string;
-
-  @CreateDateColumn({ comment: '创建时间' })
-  createtime: string;
 
   @ManyToOne(() => User, (user) => user.logs)
   @JoinColumn({ name: 'users_logs' })

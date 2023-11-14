@@ -1,18 +1,10 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './baseEntity.entity';
 import { Logs } from './logs.entity';
 import { Roles } from './roles.entity';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn({ comment: '用户id' })
   id: number;
 
@@ -47,12 +39,6 @@ export class User {
 
   @Column({ comment: '用户描述', nullable: true })
   description: string;
-
-  @CreateDateColumn({ comment: '创建时间' })
-  createtime: string;
-
-  @UpdateDateColumn({ comment: '更新时间' }) //自动生成并自动更新列
-  updatetime: string;
 
   @OneToMany(() => Logs, (logs) => logs.user)
   logs: Logs[];

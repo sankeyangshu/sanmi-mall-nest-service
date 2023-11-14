@@ -1,18 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './baseEntity.entity';
 import { Permission } from './permission.entity';
 import { Resources } from './resources.entity';
 import { User } from './user.entity';
 
 @Entity()
-export class Roles {
+export class Roles extends BaseEntity {
   @PrimaryGeneratedColumn({ comment: '角色id' })
   id: number;
 
@@ -30,12 +23,6 @@ export class Roles {
 
   @Column({ type: 'int', default: 10, unique: false, comment: '排序' })
   sort: number;
-
-  @CreateDateColumn({ comment: '创建时间' })
-  createtime: string;
-
-  @UpdateDateColumn({ comment: '更新时间' }) // 自动生成并自动更新列
-  updatetime: string;
 
   @ManyToMany(() => User, (user) => user.roles)
   users: User;
